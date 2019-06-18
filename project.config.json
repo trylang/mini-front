@@ -1,0 +1,32 @@
+{
+    "description": "项目配置文件。",
+    "setting": {
+        "urlCheck": true,
+        "es6": false,
+        "postcss": true,
+        "minified": true,
+        "newFeature": true
+    },
+    "miniprogramRoot": "dist",
+    "compileType": "miniprogram",
+    "appid": "wx593b20d5510e7ac6",
+    "projectname": "浪潮云助手",
+    "condition": {
+        "search": {
+            "current": -1,
+            "list": []
+        },
+        "conversation": {
+            "current": -1,
+            "list": []
+        },
+        "game": {
+            "currentL": -1,
+            "list": []
+        },
+        "miniprogram": {
+            "current": -1,
+            "list": []
+        }
+    }
+}
