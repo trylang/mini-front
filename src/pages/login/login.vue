@@ -1,9 +1,11 @@
 <template>
   <div class="counter-warp">
-    <button @click="get">GET1</button>
-    <button @click="post">POST</button>
-    <button @click="put">PUT</button>
-    <button @click="delete1">DELETE</button>
+    <button @click="req1">登录</button>
+    <!-- <button @click="req2">第二次请求token</button> -->
+    <button @click="ref">手动刷新token</button>
+    <button @click="autoRef">自动刷新token</button>
+    <!-- <button @click="logout">退出登录</button> -->
+    <!-- <button @click="logout">刷新userId/TODO</button> -->
   </div>
 </template>
 
@@ -36,45 +38,22 @@ export default {
 
   computed: {},
   methods: {
-    get() {
-      // this.kk.ref();
-      kk.ref();
-      fly
-        .get(`${url}/test`, this.params, {
-          withCredentials: true //跨域时是否发送cookie
-        })
-        .then(res => {
-          console.log(res);
-        })
-        .catch(error => console.error(error, `http error`));
+    req1() {
+      kk.reqToken("luanxt", "12345678a");
     },
-    post() {
-      fly
-        .post(`${url}/test`, this.params)
-        .then(res => {
-          console.log(res);
-        })
-        .catch(error => console.error(error, `http error`));
+    // req2() {
+    //   kk.updateToken();
+    // },
+    ref() {
+      kk.refToken();
     },
-    put() {
-      fly
-        .put(`${url}/test`, this.params, {
-          withCredentials: false //跨域时是否发送cookie
-        })
-        .then(res => {
-          console.log(res);
-        })
-        .catch(error => console.error(error, `http error`));
-    },
-
-    delete1() {
-      fly
-        .delete(`${url}/test`, this.params)
-        .then(res => {
-          console.log(res);
-        })
-        .catch(error => console.error(error, `http error`));
+    autoRef() {
+      // kk.getUserInfo();
+      kk.init();
     }
+    // logout() {
+    //   kk.refUserId();
+    // }
   }
 };
 </script>

@@ -15,13 +15,14 @@
 
           <xFormItem label="" prop="password">
             <i class="iconfont iconicon-Password icon"></i>
-            <xInput v-model="formData.password" placeholder="密码"/>
+            <xInput v-model="formData.password" type="password" placeholder="密码"/>
           </xFormItem>
         </xForm>
       </view>
 
       <view class="action">
-        <button class="btn">登录</button>
+        <button class="btn" @click="handleLogin()">登录</button>
+        <button class="btn" @click="handleReset()">重置</button>
         <view class="action-link">
           <a href="/pages/user/entry/register">忘记密码</a> 
           <a href="/pages/user/entry/register">立即注册</a> 
@@ -51,6 +52,18 @@ export default {
         password: [{required: true, message: '密码不能为空', trigger: 'blur'},
           {type: 'string', pattern: /^[a-z]+$/, message: '密码格式不正确', trigger: 'blur'}]
       }
+    }
+  },
+  methods: {
+    handleLogin () {
+      this.$refs.xform.validate(valid => {
+        if (valid) console.log('提交成功')
+        else console.log('校验失败')
+      })
+      console.log(this.formData)
+    },
+    handleReset () {
+      this.$refs.xform.resetFields()
     }
   }
 }

@@ -4,6 +4,8 @@
 
 ## Build Setup
 
+## Form表单校验： https://segmentfault.com/a/1190000017573392
+
 ``` bash
 # 初始化项目
 vue clone http://git.inspur.com/bss-miniapp/miniapp-front.git

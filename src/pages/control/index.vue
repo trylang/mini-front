@@ -2,7 +2,7 @@
   <div>
     <div class="header">
       <div class="header_con">
-        <p>1,000,000</p>
+        <p>{{ balance }}</p>
         <span>余额</span>
       </div>
       <div class="header_con" @click="toBePaid()">
@@ -27,30 +27,7 @@
         </div>
       </div>
       <div class="product">
-        <div class="module">
-          <div>
-            <img src="../../../static/images/未登录头象@2x.png" alt>
-          </div>
-          <span>云服务器ECS</span>
-        </div>
-        <div class="module">
-          <div>
-            <img src="../../../static/images/未登录头象@2x.png" alt>
-          </div>
-          <span>云服务器ECS</span>
-        </div>
-        <div class="module">
-          <div>
-            <img src="../../../static/images/未登录头象@2x.png" alt>
-          </div>
-          <span>云服务器ECS</span>
-        </div>
-        <div class="module">
-          <div>
-            <img src="../../../static/images/未登录头象@2x.png" alt>
-          </div>
-          <span>云服务器ECS</span>
-        </div>
+        <ProList></ProList>
       </div>
     </div>
   </div>
@@ -59,6 +36,7 @@
 <script>
 import { formatTime } from "@/utils/index";
 import card from "@/components/card";
+import ProList from "@/components/proList";
 
 export default {
   config: {
@@ -68,11 +46,13 @@ export default {
   },
 
   components: {
-    card
+    card,
+    ProList
   },
 
   data() {
     return {
+      balance: "",
       logs: [],
       imgUrls: [
         "http://mss.sankuai.com/v1/mss_51a7233366a4427fa6132a6ce72dbe54/newsPicture/05558951-de60-49fb-b674-dd906c8897a6",
@@ -83,6 +63,7 @@ export default {
   },
 
   created() {
+    this.initData();
     let logs;
     if (mpvuePlatform === "my") {
       logs = mpvue.getStorageSync({ key: "logs" }).data || [];
@@ -92,8 +73,14 @@ export default {
     this.logs = logs.map(log => formatTime(new Date(log)));
   },
   methods: {
+    initData() {
+      this.$http.control.balance().then(res => {
+        this.balance = res.result.totalBalance;
+      });
+    },
     toBePaid() {
-      this.$router.push({ path: "/pages/control/toBePaid/toBePaid" });
+      this.initData(); // FIXME: rm me after debug
+      // this.$router.push({ path: "/pages/control/toBePaid/toBePaid" });
     },
     workOrder() {
       this.$router.push({ path: "/pages/control/workOrder/workOrder" });

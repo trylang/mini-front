@@ -1,6 +1,6 @@
 <template name="recommend">
   <scroll-view class="news-list" style="height:500px" scroll-y="true"  @scrolltolower="loadMore" >
-    <view class="news-list-item"  v-for="(item, index) in newsLists"  :key="index" >
+    <navigator class="news-list-item"  v-for="(item, index) in newsLists"  :key="index"  url="/pages/home/recommend/recommendDetail">
       <view class="news-list-item-lf">
         <text class="news-item-title">{{item.title}}</text>
         <view class="news-item-date">发布时间：<text>{{item.date}}</text></view>
@@ -8,7 +8,7 @@
       <view class="news-list-item-rg">
         <img :src="item.imgUrl" />
       </view>
-    </view>
+    </navigator>
   </scroll-view>
 </template>
 
@@ -80,6 +80,7 @@
   .news-list{
     padding:10px 15px;
     background:#F6F6F6;
+    box-sizing: border-box;
   }
   .news-list-item{
     padding:12px 14px;
@@ -88,6 +89,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom:10px;
+    box-sizing: border-box;
   }
   .news-list-item .news-list-item-lf{
     width:212px;

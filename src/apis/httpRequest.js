@@ -1,36 +1,36 @@
+/* eslint-disable no-unused-vars */
 import Fly from 'flyio/dist/npm/wx'
-import { checkToken } from './auth'
-import { api } from './api'
+import cookies from 'weapp-cookie'
+
 
 var fly = new Fly()
 
-// checkToken();
-
-let token = '';
+let token = cookies.get('inspur_token');   // TODO: 此处待确定token是否会随着每一次请求不同而重新生成
 
 fly.interceptors.request.use(request => {
-  token = wx.getStorageSync('token')
   if (!token) {
-    fly.lock();
-    return api.checkToken().then(res => {
-      token = res.data.data.token;
-      request.headers = {
-        'token': token,
-        'content-type': 'application/json'
-      }
-      return request;
-    }).finally(() => {
-      fly.unlock();
-    })
-  } else {
+    console.log(`获取token失败`)
+    // TODO: 通过 keycloakService 处理异常
+    // fly.lock();
+    // return api.checkToken().then(res => {
+    //   token = res.data.data.token;
+    //   request.headers = {
+    //     'token': token,
+    //     'content-type': 'application/json'
+    //   }
+    //   return request;
+    // }).finally(() => {
+    //   fly.unlock();
+    // })
+  }
+  else {
     request.headers = {
-      'token': token,
+      'Authorization': `bearer ${token}`,
       'content-type': 'application/json'
     }
   }
-  
-  wx.showLoading({title: '加载中...'})
-  
+  wx.showLoading({ title: '加载中...' })
+
   return request
 })
 
@@ -39,7 +39,7 @@ fly.interceptors.response.use(response => {
   return response.data
 }, err => {
   wx.hideLoading()
-  if(err) {
+  if (err) {
     wx.showToast({
       title: err.message,
       icon: 'none',
@@ -52,5 +52,3 @@ fly.interceptors.response.use(response => {
 fly.config.timeout = 7000
 
 export default fly
-
-

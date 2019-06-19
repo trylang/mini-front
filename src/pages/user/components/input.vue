@@ -1,6 +1,6 @@
 <template>
   <div>
-      <input placeholder-class="placeholder-class" :placeholder="placeholder" auto-focus
+      <input placeholder-class="placeholder-class" :placeholder="placeholder"
         ref="input" :type="type" :value="currentValue" @input="handleInput" @blur="handleBlur"/>
   </div>
 </template>
@@ -10,7 +10,6 @@ import Emitter from '../components/emitter'
 export default {
   name: 'xFormItem',
   data () {
-    console.log(43434, this.label)
     return {
       currentValue: this.value, id: this.label
     }
@@ -23,7 +22,6 @@ export default {
   },
   watch: {
     value (value) {
-      console.log(value)
       this.currentValue = value
     }
   },

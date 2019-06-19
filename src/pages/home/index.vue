@@ -1,11 +1,14 @@
 <template>
-  <div>
+
+  <div class="page">
+    <button open-type="getUserInfo" lang="zh_CN" @getuserinfo="onGotUserInfo">获取用户信息</button>
+    <scroll-view class="news-list" style="height:100vh;" scroll-y="true"  @scrolltolower="loadMore" >
     <!--banner图开始-->
-    <swiper :indicator-dots="indicatorDots" :circular="circular" previous-margin="10px" next-margin="20px"
+    <swiper :indicator-dots="indicatorDots" :circular="circular" previous-margin="10px" next-margin="10px"
             :autoplay="autoplay" :interval="interval" :duration="duration">
       <block  v-for="(item, index) in imgUrls"  :key="index" >
         <swiper-item class="banner-item">
-          <image :src="item" class="slide-image" width="355" height="150"/>
+          <image :src="item" class="slide-image" />
         </swiper-item>
       </block>
     </swiper>
@@ -30,7 +33,6 @@
       </view>
     </view>
     <!--导航结束-->
-    <scroll-view class="news-list" style="height:500px" scroll-y="true"  @scrolltolower="loadMore" >
       <view class="recommend">
         <view class="panel-title"><text class="h2">为你推荐</text><text class="more" @click="goRecommend">更多</text></view>
         <view class="news-list">
@@ -59,7 +61,9 @@
 
 export default {
   config: {
-    navigationBarTitleText: '浪潮云'
+    navigationBarTitleText: '浪潮云',
+    navigationBarBackgroundColor: '#0062ac',
+    navigationBarTextStyle: 'white'
   },
   data () {
     return {
@@ -118,6 +122,13 @@ export default {
     }
   },
   methods: {
+    onGotUserInfo () {
+      wx.getUserInfo({
+        success: function (res) {
+          mpvue.setStorageSync('userInfo', res.userInfo)
+        }
+      })
+    },
     checkToken () {
       this.$http.user.info().then(res => {
         console.log(res)
@@ -146,21 +157,19 @@ export default {
 </script>
 
 <style>
-.counter-warp {
-  text-align: center;
-  margin-top: 100px;
-}
-.home {
-  display: inline-block;
-  margin: 100px auto;
-  padding: 5px 10px;
-  color: blue;
-  border: 1px solid blue;
-}
+  .page{
+    height:100vh;
+    padding-top:10px;
+    box-sizing: border-box;
+  }
   .banner-item{
-    padding:0 10px;
+    padding:0 5px;
     box-sizing: border-box;
     width:100%;
+  }
+  .banner-item image{
+    width:100%;
+    height:166px;
   }
   .nav {
     height: 114px;

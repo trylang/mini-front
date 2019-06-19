@@ -5,7 +5,13 @@ export default {
     usingComponents: {
       'w-button': 'wuss-weapp/dist/w-button/index',
       'w-dialog': 'wuss-weapp/dist/w-dialog/index',
-      'w-popup': 'wuss-weapp/dist/w-popup/index'
+      'w-popup': 'wuss-weapp/dist/w-popup/index',
+      "w-cell": "wuss-weapp/dist/w-cell/index",
+      "w-switch": "wuss-weapp/dist/w-switch/index",
+      "w-pane": "wuss-weapp/dist/w-pane/index",
+      "w-alert":"wuss-weapp/dist/w-alert/index",
+      "w-icon": "wuss-weapp/dist/w-icon/index",
+      "w-action-sheet":"wuss-weapp/dist/w-action-sheet/index"
     }
   },
 
@@ -40,6 +46,9 @@ export default {
 </script>
 
 <style>
+  page{
+    border-top:1px solid #F6F6F6;
+  }
 .container {
   height: 100%;
   display: flex;

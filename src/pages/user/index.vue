@@ -18,6 +18,9 @@
     </view>
     <view class="action-list">
       <view class="action-item" v-for="(item, index) in actionList" :key="index" @click="goDetails(item.details)">
+        <button class="kefu" v-if="item.details=='kefu'" open-type="contact" :session-from="sessionFrom" bindcontact="handleContact">
+          在线客服
+        </button>
         <view class="left">
           <image class="img" :src="item.url"></image> 
           <text class="text marg-l-10">{{item.label}}</text>
@@ -55,6 +58,7 @@ export default {
 
   data () {
     return {
+      userInfo: mpvue.getStorageSync('userInfo'),
       showAuth: false,
       // userImg: '/static/users/user.png',
       userImg: '',
@@ -75,24 +79,28 @@ export default {
       actionList: [{
         url: '/static/tabs/home.png',
         label: '消息中心',
-        details:'/pages/user/infoCenter/infoCenter'
+        details: '/pages/user/infoCenter/infoCenter'
       }, {
         url: '/static/tabs/home.png',
         label: 'MFA安全码'
       }, {
         url: '/static/tabs/home.png',
         label: '在线客服',
-        desc: '快速1对1解答'
+        desc: '快速1对1解答',
+        details: 'kefu'
       }, {
         url: '/static/tabs/home.png',
-        label: '分享小程序'
+        label: '分享小程序',
+        details: 'share'
       }, {
         url: '/static/tabs/home.png',
         label: '联系电话',
-        desc: '7*24小时服务'
+        desc: '7*24小时服务',
+        details: 'phone'
       }, {
         url: '/static/tabs/home.png',
-        label: '设置'
+        label: '设置',
+        details: '/pages/user/setting'
       }]
     }
   },
@@ -103,6 +111,9 @@ export default {
         bg: this.userImg ? '#0060B0' : '#F7F8FB',
         auth: !this.userImg ? '/static/users/real_name.png' : '/static/users/no_real_name.png'
       }
+    },
+    sessionFrom () {
+      return `7moor|${this.userInfo.nickName}|${this.userInfo.avatarUrl}`
     }
   },
   methods: {
@@ -112,12 +123,22 @@ export default {
     hideDialog () {
       this.showAuth = false
     },
-    goDetails(e){
-     // console.log(e)
-       this.$router.push({ path:e });
+    goDetails (e) {
+      if (e === 'kefu') return
+      if (e === 'share') {
+        console.log('分享')
+      } else if (e === 'phone') {
+        console.log('联系电话')
+      } else {
+        this.$router.push({ path: e })
+      }
     },
     handleAction () {
       this.$router.push({path: '/pages/user/entry/login'})
+    },
+    handleContact (e) {
+      console.log(e.path)
+      console.log(e.query)
     }
   }
 }
@@ -187,6 +208,7 @@ export default {
     padding: 0 30rpx;
     background: #fff;
     .action-item {
+      position: relative;
       height: 100rpx;
       color: $text-color;
       display: flex;
@@ -195,6 +217,11 @@ export default {
       border-bottom: 1rpx solid #D9D9D9;
       font-size: 30rpx;
       vertical-align: middle;
+      .kefu {
+        position: absolute;
+        width: 100%;
+        opacity: 0;
+      }
       .desc {
         color: $desc-color;
       }

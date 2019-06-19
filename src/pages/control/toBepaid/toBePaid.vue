@@ -29,8 +29,10 @@ export default {
   config: {
     navigationBarTitleText: "待支付"
   },
-  data: {
-    isNoData: false
+  data() {
+    return {
+      isNoData: false
+    };
   },
   methods: {}
 };

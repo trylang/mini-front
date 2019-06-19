@@ -18,6 +18,26 @@ export default {
   provide () {
     return {form: this}
   },
+  methods: {
+    resetFields () {
+      this.fields.forEach(field => field.resetField())
+    },
+    validate (cb) {
+      return new Promise(resolve => {
+        let valid = true
+        let count = 0
+        this.fields.forEach(field => {
+          field.validate('', error => {
+            if (error) valid = false
+            if (++count === this.fields.length) {
+              resolve(valid)
+              if (typeof cb === 'function') cb(valid)
+            }
+          })
+        })
+      })
+    }
+  },
   created () {
     let haha = []
     this.$on('xform-add', field => {

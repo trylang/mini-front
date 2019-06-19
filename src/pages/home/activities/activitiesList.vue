@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div class="page">
       <!--banner图开始-->
-      <swiper :indicator-dots="indicatorDots" :circular="circular" previous-margin="10px" next-margin="20px"
+      <swiper :indicator-dots="indicatorDots" :circular="circular" previous-margin="10px" next-margin="10px"
               :autoplay="autoplay" :interval="interval" :duration="duration">
         <block  v-for="(item, index) in imgUrls"  :key="index" >
           <swiper-item class="banner-item">
-            <image :src="item" class="slide-image" width="355" height="150"/>
+            <image :src="item" class="slide-image" />
           </swiper-item>
         </block>
       </swiper>
@@ -15,7 +15,7 @@
         <view class="activities-list">
           <view class="activities-list-item">
             <view class="activities-item-lf">
-
+              <img src="/static/images/icon-activity01.svg" />
             </view>
             <view class="activities-item-rg">
               <text class="h2">企业上云</text>
@@ -24,7 +24,7 @@
           </view>
           <view class="activities-list-item">
             <view class="activities-item-lf">
-
+              <img src="/static/images/icon-activity02.svg" />
             </view>
             <view class="activities-item-rg">
               <text class="h2">0元试用</text>
@@ -33,7 +33,7 @@
           </view>
           <view class="activities-list-item">
             <view class="activities-item-lf">
-
+              <img src="/static/images/icon-activity03.svg" />
             </view>
             <view class="activities-item-rg">
               <text class="h2">光速云计划</text>
@@ -69,13 +69,22 @@
 </script>
 
 <style scoped>
+  .page{
+    height:100vh;
+    background:#F6F6F6;
+    padding-top:10px;
+    box-sizing: border-box;
+  }
   .banner-item{
-    padding:0 10px;
+    padding:0 5px;
     box-sizing: border-box;
     width:100%;
   }
+  .banner-item image{
+    width:100%;
+    height:166px;
+  }
   .activities{
-    background:#F6F6F6;
     padding:0 17px;
     height:350px;
   }
@@ -105,14 +114,28 @@
     justify-content: center;
     align-items: center;
   }
+  .activities-list .activities-list-item:nth-child(1) img{
+     height:40px;
+   }
+  .activities-list .activities-list-item:nth-child(2) img{
+    height:40px;
+  }
+  .activities-list .activities-list-item:nth-child(3) img{
+    height:30px;
+  }
   .activities-item-lf{
     margin-right:25px;
+  }
+  .activities-item-lf img{
+    width:45px;
+
   }
   .activities-item-rg{
     display:flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    width:196px;
   }
   .activities-item-rg .h2{
     font-size:18px;

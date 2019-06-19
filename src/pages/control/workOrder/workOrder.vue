@@ -29,8 +29,10 @@ export default {
   config: {
     navigationBarTitleText: "工单"
   },
-  data: {
-    isNoData: false
+  data() {
+    return {
+      isNoData: false
+    };
   },
   methods: {}
 };

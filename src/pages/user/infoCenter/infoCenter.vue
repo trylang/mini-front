@@ -44,9 +44,11 @@ export default {
   config: {
     navigationBarTitleText: "消息中心"
   },
-  data: {
-    isNoData: false,
-    isSystem: false
+  data() {
+    return {
+      isNoData: false,
+      isSystem: false
+    };
   },
   methods: {}
 };
@@ -65,7 +67,6 @@ page {
   height: 100%;
 }
 .allList {
-  padding: 0 30rpx;
   box-sizing: border-box;
 }
 .noData {
@@ -98,7 +99,7 @@ page {
   padding: 32rpx 40rpx;
 }
 .clo2 {
-  width: 70%;
+  width: 80%;
 }
 .clo2 span {
   color: #999;

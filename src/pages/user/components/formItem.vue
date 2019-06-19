@@ -1,4 +1,4 @@
-<template>
+<template :name="prop">
   <div>
     <div class="item-wrap" :style="{borderBottomColor: isShowMes? '#FA553D': 'D9D9D9'}">
       <label :for="labelFor" v-if="label">{{label}}</label>
